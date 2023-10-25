@@ -5,23 +5,27 @@ import threading
 
 # Define the string to include
 inlcude_string = "HP"
+exlude_strings = ["ENGINE"]
 
 # Function to create child bones for a specific armature object
 def create_child_bones_for_armature(armature):
     # Check if the given armature is valid
     if armature and armature.type == 'ARMATURE':
-        # Create a set to store the names of newly created bones
-        created_bones = set()
-
 
         # Get the current time (used to track bone creation time)
         current_time = time.time()
-
+        
         bones_list = frozenset(armature.data.edit_bones)
         
         # Iterate through all bones in the armature
         for bone in bones_list:
+            skip = False
             # Check if the bone name contains the exclude_string
+            for exlude_string in exlude_strings:
+                if exlude_string in bone.name:
+                    skip = True
+            if skip == True:
+                continue
             if inlcude_string in bone.name:
                 print(bone.name)
                 # Calculate the direction vector of the bone
@@ -40,8 +44,6 @@ def create_child_bones_for_armature(armature):
                 # Make the new bone a child of the current bone
                 new_bone.parent = bone
 
-                # Add the name of the newly created bone to the set
-                created_bones.add(new_bone_name)
 
                 time.sleep(0.05)
 
@@ -53,6 +55,9 @@ def create_child_bones_for_armature(armature):
 
         # Exit Edit Mode (in the main thread)
         bpy.ops.object.mode_set(mode='OBJECT')
+        
+        final_time = time.time() - current_time
+        print(f"Finished in {final_time} seconds")
 
     else:
         print("The provided object is not a valid armature.")
