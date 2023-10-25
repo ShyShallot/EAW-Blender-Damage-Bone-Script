@@ -3,7 +3,7 @@ import mathutils
 import time
 import threading
 
-# Define the string to exclude
+# Define the string to include
 inlcude_string = "HP"
 
 # Function to create child bones for a specific armature object
