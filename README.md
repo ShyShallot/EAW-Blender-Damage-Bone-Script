@@ -3,7 +3,7 @@ A blender 3.3+ script made by ChatGPT to automaticly create damage_emit bones fo
 
 This doesn't auto set proxies however it still automates the process of creating those bones making the process quicker.
 
-#UPDATE
+# UPDATE
 Updated Fork of Alamo Plugin that created a UI version of this script: https://github.com/ShyShallot/Blender-ALAMO-Plugin
 
 # How to use
